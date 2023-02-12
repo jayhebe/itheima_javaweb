@@ -1,0 +1,7 @@
+mysqld --initialize-insecure
+mysqld -install
+net start mysql
+mysqladmin -u root password ********
+-----------------------------------------
+net stop mysql
+mysqld -remove mysql
