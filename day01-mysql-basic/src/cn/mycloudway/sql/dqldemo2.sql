@@ -1,0 +1,5 @@
+SELECT * FROM stu ORDER BY age;
+
+SELECT * FROM stu ORDER BY math DESC;
+
+SELECT * FROM stu ORDER BY math DESC, english ASC;
