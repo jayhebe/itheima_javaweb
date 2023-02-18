@@ -139,4 +139,5 @@ GROUP BY
 	emp.dept_id;
     
 SELECT * FROM emp;
+DESC emp;
 SELECT * FROM dept;
