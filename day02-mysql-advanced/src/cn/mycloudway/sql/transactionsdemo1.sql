@@ -14,6 +14,6 @@ SELECT * FROM account;
 
 BEGIN;
 UPDATE account SET money = money - 500 WHERE name = "李四";
-This is a wrong statement.
+-- This is a wrong statement.
 UPDATE account SET money = money + 500 WHERE name = "张三";
 ROLLBACK;
