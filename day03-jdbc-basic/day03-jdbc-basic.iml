@@ -7,7 +7,6 @@
     </content>
     <orderEntry type="jdk" jdkName="corretto-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
     <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
@@ -18,7 +17,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="druid-1.1.24" level="project" />
-    <orderEntry type="library" name="druid-1.1.24 (2)" level="project" />
   </component>
 </module>
