@@ -2,4 +2,5 @@ out
 lib
 .idea
 target
+mybatis-config.xml
 *.properties
