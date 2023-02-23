@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+<img id="itachi" src="images/Itachi.JPG"><br>
+
+<div class="cls">火影忍者</div><br>
+<div class="cls">晓组织</div><br>
+
+<input type="checkbox" name="hobby" value="movie">电影
+<input type="checkbox" name="hobby" value="travel">旅游
+<input type="checkbox" name="hobby" value="game">游戏
+<br>
+
+<script>
+  //var img = document.getElementById("itachi");
+  //alert(img);
+
+  //var divs = document.getElementsByTagName("div");
+  //for (let i = 0; i < divs.length; i++) {
+  //  alert(divs[i]);
+  //}
+
+  //var hobbies = document.getElementsByName("hobby");
+  //for (let i = 0; i < hobbies.length; i++) {
+  //  alert(hobbies[i].value);
+  //}
+
+  var cls = document.getElementsByClassName("cls");
+  for (let i = 0; i < cls.length; i++) {
+    alert(cls[i].innerHTML);
+  }
+</script>
+</body>
+</html>

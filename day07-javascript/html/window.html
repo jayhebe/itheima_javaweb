@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Window</title>
+</head>
+<body>
+<style>
+  div{
+    font-size: 100px;
+  }
+</style>
+<script>
+    function startTiming() {
+        var time = document.getElementById("time").value;
+        document.getElementById("timer").innerHTML = time;
+
+        var start = setInterval(() => {
+            time = time - 1;
+            document.getElementById("timer").innerHTML = time;
+            if (time === 0) {
+                clearInterval(start);
+            }
+        }, 1000);
+    }
+</script>
+<div id="timer">
+    60
+</div>
+<br>
+<input type="text" name="time" id="time" value="60"/>
+<input type="button" name="start" id="start" value="start" onclick="startTiming();"/>
+</body>
+</html>
