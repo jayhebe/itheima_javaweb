@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<form action="/day09-request-response/demo2" method="post">
+    <table>
+        <tr>
+            <td><label for="username">用户名：</label></td>
+            <td><input type="text" id="username" name="username"><br></td>
+            <td><div id="msg_username"></div></td>
+        </tr>
+        <tr>
+            <td><label for="password">密码：</label></td>
+            <td><input type="password" id="password" name="password"><br></td>
+            <td><div id="msg_password"></div></td>
+        </tr>
+        <tr>
+            <td><label for="mobile">手机号：</label></td>
+            <td><input type="text" id="mobile" name="mobile"><br></td>
+            <td><div id="msg_mobile"></div></td>
+        </tr>
+        <tr>
+            <td>
+                <label>爱好：</label>
+            </td>
+            <td>
+                <input type="checkbox" name="hobby" id="travel" value="travel"><label for="travel">旅游</label>
+                <input type="checkbox" name="hobby" id="game" value="game"><label for="game">游戏</label>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="注册">
+                <input type="reset" value="重置">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
