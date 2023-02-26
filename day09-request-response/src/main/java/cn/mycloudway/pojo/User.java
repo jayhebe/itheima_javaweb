@@ -2,16 +2,20 @@ package cn.mycloudway.pojo;
 
 public class User {
     private int id;
-    private String name;
+    private String username;
     private String password;
 
     public User() {
     }
 
-    public User(int id, String name, String password) {
-        this.id = id;
-        this.name = name;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
+    }
+
+    public User(int id, String username, String password) {
+        this(username, password);
+        this.id = id;
     }
 
     public int getId() {
@@ -22,12 +26,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -42,7 +46,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

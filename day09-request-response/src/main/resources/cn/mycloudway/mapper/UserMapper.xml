@@ -13,4 +13,11 @@
         AND
             password = #{password}
     </select>
+
+    <insert id="add">
+        INSERT INTO
+            tb_user (username, password)
+        VALUES
+            (#{username}, #{password})
+    </insert>
 </mapper>
