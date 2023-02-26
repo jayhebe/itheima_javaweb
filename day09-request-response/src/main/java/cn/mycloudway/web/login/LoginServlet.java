@@ -1,7 +1,7 @@
 package cn.mycloudway.web.login;
 
-import cn.mycloudway.web.mapper.UserMapper;
-import cn.mycloudway.web.pojo.User;
+import cn.mycloudway.mapper.UserMapper;
+import cn.mycloudway.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

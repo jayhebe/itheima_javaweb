@@ -1,6 +1,6 @@
-package cn.mycloudway.web.mapper;
+package cn.mycloudway.mapper;
 
-import cn.mycloudway.web.pojo.User;
+import cn.mycloudway.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

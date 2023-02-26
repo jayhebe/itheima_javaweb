@@ -1,4 +1,4 @@
-package cn.mycloudway.web.pojo;
+package cn.mycloudway.pojo;
 
 public class User {
     private int id;
