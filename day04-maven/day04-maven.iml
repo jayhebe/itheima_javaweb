@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="$MODULE_DIR$/day04-maven/pom.xml" external.system.module.type="SINGLE_MODULE" external.system.module.version="223-2" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+    <output url="file://$MODULE_DIR$/day04-maven/target/classes" />
+    <output-test url="file://$MODULE_DIR$/day04-maven/target/test-classes" />
+    <content url="file://$MODULE_DIR$/day04-maven">
+      <sourceFolder url="file://$MODULE_DIR$/day04-maven/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/day04-maven/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/day04-maven/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/day04-maven/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/day04-maven/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.48" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.24" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+  </component>
+</module>

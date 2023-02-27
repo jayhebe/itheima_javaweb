@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="$MODULE_DIR$/day05-mybatis/pom.xml" external.system.module.type="SINGLE_MODULE" external.system.module.version="223-2" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+    <output url="file://$MODULE_DIR$/day05-mybatis/target/classes" />
+    <output-test url="file://$MODULE_DIR$/day05-mybatis/target/test-classes" />
+    <content url="file://$MODULE_DIR$/day05-mybatis">
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/target/generated-sources/annotations" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/day05-mybatis/target/generated-test-sources/test-annotations" isTestSource="true" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/day05-mybatis/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.5.5" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.48" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.20" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+  </component>
+</module>
