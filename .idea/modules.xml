@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/day01-mysql-basic/day01-mysql-basic.iml" filepath="$PROJECT_DIR$/day01-mysql-basic/day01-mysql-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day02-mysql-advanced/day02-mysql-advanced.iml" filepath="$PROJECT_DIR$/day02-mysql-advanced/day02-mysql-advanced.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day03-jdbc-basic/day03-jdbc-basic.iml" filepath="$PROJECT_DIR$/day03-jdbc-basic/day03-jdbc-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day06-html/day06-html.iml" filepath="$PROJECT_DIR$/day06-html/day06-html.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day07-javascript/day07-javascript.iml" filepath="$PROJECT_DIR$/day07-javascript/day07-javascript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day08-web-tomcat-servlet.iml" filepath="$PROJECT_DIR$/day08-web-tomcat-servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itheima_javaweb.iml" filepath="$PROJECT_DIR$/itheima_javaweb.iml" />
+    </modules>
+  </component>
+</project>

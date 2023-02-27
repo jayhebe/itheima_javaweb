@@ -1,6 +1,5 @@
 out
-lib
-.idea
 target
+workspace.xml
 mybatis-config.xml
 *.properties
