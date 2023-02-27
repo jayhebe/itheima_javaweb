@@ -2,6 +2,7 @@ package cn.mycloudway.web.register;
 
 import cn.mycloudway.mapper.UserMapper;
 import cn.mycloudway.pojo.User;
+import cn.mycloudway.util.SqlSessionFactoryUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,25 +21,30 @@ import java.io.PrintWriter;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        User user = new User(username, password);
 
         resp.setContentType("text/html;charset=utf8");
         PrintWriter writer = resp.getWriter();
 
-        int count = mapper.add(user);
-        if (count > 0) {
-            writer.write("Register successful.");
+        User user = mapper.selectByUsername(username);
+        if (user == null) {
+            user = new User(username, password);
+            int count = mapper.add(user);
+            if (count > 0) {
+                writer.write("Register successful.");
+            } else {
+                writer.write("Register failed.");
+            }
         } else {
-            writer.write("Register failed.");
+            writer.write("User already exists.");
         }
+
+        sqlSession.close();
     }
 }

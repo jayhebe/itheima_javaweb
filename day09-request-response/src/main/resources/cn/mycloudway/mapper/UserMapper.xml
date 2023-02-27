@@ -14,6 +14,15 @@
             password = #{password}
     </select>
 
+    <select id="selectByUsername" resultType="User">
+        SELECT
+            *
+        FROM
+            tb_user
+        WHERE
+            username = #{username}
+    </select>
+
     <insert id="add">
         INSERT INTO
             tb_user (username, password)

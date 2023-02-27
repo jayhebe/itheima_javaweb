@@ -2,6 +2,7 @@ package cn.mycloudway.web.login;
 
 import cn.mycloudway.mapper.UserMapper;
 import cn.mycloudway.pojo.User;
+import cn.mycloudway.util.SqlSessionFactoryUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,9 +21,7 @@ import java.io.PrintWriter;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -39,5 +38,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             writer.write("Login failed.");
         }
+
+        sqlSession.close();
     }
 }
