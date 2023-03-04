@@ -12,4 +12,6 @@ public interface BrandMapper {
     int add(Brand brand);
 
     int update(Brand brand);
+
+    int deleteById(@Param("id") int id);
 }

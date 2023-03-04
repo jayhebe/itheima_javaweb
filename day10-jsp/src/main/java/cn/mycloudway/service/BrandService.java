@@ -55,4 +55,15 @@ public class BrandService {
 
         return result;
     }
+
+    public int deleteById(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int result = brandMapper.deleteById(id);
+
+        sqlSession.close();
+
+        return result;
+    }
 }

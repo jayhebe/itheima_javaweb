@@ -44,4 +44,11 @@
         WHERE
             id = #{id}
     </update>
+
+    <delete id="deleteById">
+        DELETE FROM
+            tb_brand
+        WHERE
+            id = #{id}
+    </delete>
 </mapper>
