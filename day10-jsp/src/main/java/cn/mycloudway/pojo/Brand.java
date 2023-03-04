@@ -10,13 +10,17 @@ public class Brand {
     public Brand() {
     }
 
-    public Brand(int id, String brandName, String companyName, int ordered, String description, int status) {
-        this.id = id;
+    public Brand(String brandName, String companyName, int ordered, String description, int status) {
         this.brandName = brandName;
         this.companyName = companyName;
         this.ordered = ordered;
         this.description = description;
         this.status = status;
+    }
+
+    public Brand(int id, String brandName, String companyName, int ordered, String description, int status) {
+        this(brandName, companyName, ordered, description, status);
+        this.id = id;
     }
 
     public int getId() {
