@@ -16,10 +16,32 @@
             tb_brand
     </select>
 
+    <select id="selectById" resultMap="brandResultMap">
+        SELECT
+            *
+        FROM
+            tb_brand
+        WHERE
+            id = #{id}
+    </select>
+
     <insert id="add">
         INSERT INTO
             tb_brand (brand_name, company_name, ordered, description, status)
         VALUES
             (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status})
     </insert>
+
+    <update id="update">
+        UPDATE
+            tb_brand
+        SET
+            brand_name = #{brandName},
+            company_name = #{companyName},
+            ordered = #{ordered},
+            description = #{description},
+            status = #{status}
+        WHERE
+            id = #{id}
+    </update>
 </mapper>

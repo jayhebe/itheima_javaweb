@@ -36,7 +36,7 @@
                 <td>禁用</td>
             </c:if>
 
-            <td><a href="/day10-jsp-1.0-SNAPSHOT/brandSelectByIdServlet?id=${brand.id}">修改</a> <a href="#">删除</a></td>
+            <td><a href="/day10-jsp-1.0-SNAPSHOT/getBrandById?id=${brand.id}">修改</a> <a href="#">删除</a></td>
         </tr>
 
     </c:forEach>
