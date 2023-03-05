@@ -14,11 +14,20 @@ public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String remember = req.getParameter("remember");
 
         UserService userService = new UserService();
         User user = userService.login(username, password);
 
         if (user != null) {
+            if ("1".equals(remember)) {
+                Cookie cookieUsername = new Cookie("username", username);
+                Cookie cookiePassword = new Cookie("password", password);
+
+                resp.addCookie(cookieUsername);
+                resp.addCookie(cookiePassword);
+            }
+
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("username", username);
             req.getRequestDispatcher("/getAllBrands").forward(req, resp);
