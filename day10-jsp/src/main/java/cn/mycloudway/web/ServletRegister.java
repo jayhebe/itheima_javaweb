@@ -23,19 +23,26 @@ public class ServletRegister extends HttpServlet {
         String correctCheckCode = (String) httpSession.getAttribute("checkCode");
 
         UserService userService = new UserService();
-        if (!userService.exists(username) && checkCode.equalsIgnoreCase(correctCheckCode)) {
-            User user = new User(username, password);
-            int result = userService.register(user);
+        if (userService.exists(username)) {
+            req.setAttribute("register_msg", "用户名已存在");
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            return;
+        }
 
-            if (result > 0) {
-                req.setAttribute("register_msg", "注册成功，请登录");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
-            } else {
-                req.setAttribute("register_msg", "注册失败，请联系管理员");
-                req.getRequestDispatcher("/register.jsp").forward(req, resp);
-            }
+        if (!checkCode.equalsIgnoreCase(correctCheckCode)) {
+            req.setAttribute("register_msg", "验证码错误");
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            return;
+        }
+
+        User user = new User(username, password);
+        int result = userService.register(user);
+
+        if (result > 0) {
+            req.setAttribute("register_msg", "注册成功，请登录");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         } else {
-            req.setAttribute("register_msg", "用户名已存在或验证码错误");
+            req.setAttribute("register_msg", "注册失败，请联系管理员");
             req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
     }
