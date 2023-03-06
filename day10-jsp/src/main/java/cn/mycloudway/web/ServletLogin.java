@@ -24,12 +24,15 @@ public class ServletLogin extends HttpServlet {
                 Cookie cookieUsername = new Cookie("username", username);
                 Cookie cookiePassword = new Cookie("password", password);
 
+                cookieUsername.setMaxAge(60 * 60 * 24 * 7);
+                cookiePassword.setMaxAge(60 * 60 * 24 * 7);
+
                 resp.addCookie(cookieUsername);
                 resp.addCookie(cookiePassword);
             }
 
             HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("username", username);
+            httpSession.setAttribute("user", user);
             req.getRequestDispatcher("/getAllBrands").forward(req, resp);
         } else {
             req.setAttribute("login_msg", "用户名或密码错误");
