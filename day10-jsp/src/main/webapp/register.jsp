@@ -11,7 +11,7 @@
 <div class="form-div">
     <div class="reg-content">
         <h1>欢迎注册</h1>
-        <span>已有帐号？</span> <a href="login.html">登录</a>
+        <span>已有帐号？</span> <a href="login.jsp">登录</a>
     </div>
     <form id="reg-form" action="/day10-jsp-1.0-SNAPSHOT/register" method="post">
 
@@ -41,7 +41,7 @@
                 <td>验证码</td>
                 <td class="inputs">
                     <input name="checkCode" type="text" id="checkCode">
-                    <img id="checkCodeImg" src="/brand-demo/checkCodeServlet">
+                    <img id="checkCodeImg" src="/day10-jsp-1.0-SNAPSHOT/checkCode">
                     <a href="#" id="changeImg" >看不清？</a>
                 </td>
             </tr>
@@ -58,7 +58,7 @@
 
 <script>
     document.getElementById("changeImg").onclick = function () {
-        document.getElementById("checkCodeImg").src = "/brand-demo/checkCodeServlet?"+new Date().getMilliseconds();
+        document.getElementById("checkCodeImg").src = "/day10-jsp-1.0-SNAPSHOT/checkCode?"+new Date().getMilliseconds();
     }
 
 </script>

@@ -1,5 +1,6 @@
 package cn.mycloudway.web;
 
+import cn.mycloudway.pojo.User;
 import cn.mycloudway.service.UserService;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/register")
@@ -15,10 +17,15 @@ public class ServletRegister extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String checkCode = req.getParameter("checkCode");
+
+        HttpSession httpSession = req.getSession();
+        String correctCheckCode = (String) httpSession.getAttribute("checkCode");
 
         UserService userService = new UserService();
-        if (!userService.exists(username)) {
-            int result = userService.register(username, password);
+        if (!userService.exists(username) && checkCode.equalsIgnoreCase(correctCheckCode)) {
+            User user = new User(username, password);
+            int result = userService.register(user);
 
             if (result > 0) {
                 req.setAttribute("register_msg", "注册成功，请登录");
@@ -28,7 +35,7 @@ public class ServletRegister extends HttpServlet {
                 req.getRequestDispatcher("/register.jsp").forward(req, resp);
             }
         } else {
-            req.setAttribute("register_msg", "用户名已存在");
+            req.setAttribute("register_msg", "用户名已存在或验证码错误");
             req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
     }

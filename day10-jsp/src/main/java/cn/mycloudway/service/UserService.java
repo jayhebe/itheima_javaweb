@@ -31,12 +31,11 @@ public class UserService {
         return user != null;
     }
 
-    public int register(String username, String password) {
+    public int register(User user) {
         SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-        User user = new User(username, password);
         int result = userMapper.add(user);
 
         sqlSession.close();
