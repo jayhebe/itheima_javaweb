@@ -1,4 +1,4 @@
-package cn.mycloudway.web;
+package cn.mycloudway.web.servlet;
 
 import cn.mycloudway.util.CheckCodeUtils;
 

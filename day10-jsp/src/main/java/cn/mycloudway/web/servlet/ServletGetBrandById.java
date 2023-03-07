@@ -1,6 +1,6 @@
-package cn.mycloudway.web;
+package cn.mycloudway.web.servlet;
 
-
+import cn.mycloudway.pojo.Brand;
 import cn.mycloudway.service.BrandService;
 
 import javax.servlet.ServletException;
@@ -11,21 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/deleteBrandById")
-public class ServletDeleteBrandById extends HttpServlet {
+@WebServlet(urlPatterns = "/getBrandById")
+public class ServletGetBrandById extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
 
         BrandService brandService = new BrandService();
-        int result = brandService.deleteById(id);
+        Brand brand = brandService.selectById(id);
 
-        if (result > 0) {
-            resp.sendRedirect("/day10-jsp-1.0-SNAPSHOT/getAllBrands");
+        if (brand != null) {
+            req.setAttribute("brand", brand);
+            req.getRequestDispatcher("/updateBrand.jsp").forward(req, resp);
         } else {
             resp.setContentType("text/html;charset=utf8");
             PrintWriter writer = resp.getWriter();
-            writer.write("删除失败");
+            writer.write("该ID不存在");
         }
     }
 }
