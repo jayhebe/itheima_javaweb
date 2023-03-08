@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有品牌</title>
+</head>
+<body>
+<input type="button" value="新增" id="add"><br>
+<hr>
+<table border="1" cellspacing="0" width="60%">
+    <tr>
+        <th>序号</th>
+        <th>品牌名称</th>
+        <th>企业名称</th>
+        <th>排序</th>
+        <th>品牌介绍</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+</table>
+
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    window.onload = function() {
+        axios.get("http://localhost:8080/day10-jsp/getAllBrandsByJson").then(function(resp) {
+            var brands = resp.data;
+            for (let i = 0; i < brands.length; i++) {
+                alert(brands[i].brandName);
+            }
+        });
+    }
+    document.getElementById("add").onclick = function (){
+        location.href = "/day10-jsp-1.0-SNAPSHOT/addBrand.jsp";
+    }
+
+</script>
+</body>
+</html>

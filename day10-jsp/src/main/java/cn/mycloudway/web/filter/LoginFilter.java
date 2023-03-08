@@ -20,7 +20,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 
         String[] urlWhiteList = {
-                "/css", "/imgs", "/login", "/register", "/checkCode"
+                "/css", "/img", "/js", "/login", "/register", "/checkCode", "/getAllBrandsByJson", "/getAllBrands.html"
         };
         String currentUrl = httpServletRequest.getRequestURL().toString();
 
