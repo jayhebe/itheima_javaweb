@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1><div id="name"></div></h1>
+<h1>
+    <div id="name"></div>
+</h1>
 <script src="js/axios-0.18.0.js"></script>
 <script>
   /*
@@ -19,6 +21,7 @@
   axios.get("http://localhost:8080/day12-filter-listener-ajax/axios?username=Hebe").then(function(resp) {
     document.getElementById("name").innerHTML = "Hello, " + resp.data;
   })
+
 </script>
 </body>
 </html>

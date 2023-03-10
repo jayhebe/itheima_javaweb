@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加品牌</title>
+</head>
+<body>
+<h3>添加品牌</h3>
+<div>
+    <div id="result"></div>
+    品牌名称：<input name="brandName" id="brandName"><br>
+    企业名称：<input name="companyName" id="companyName"><br>
+    排序：<input name="ordered" id="ordered"><br>
+    描述信息：<textarea rows="5" cols="20" name="description" id="description"></textarea><br>
+    状态：
+    <input type="radio" name="status" value="0">禁用
+    <input type="radio" name="status" value="1">启用<br>
+
+    <input type="submit" id="submit" value="提交">
+</div>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    document.getElementById("submit").onclick = function() {
+        var brandName = document.getElementById("brandName").value;
+        var companyName = document.getElementById("companyName").value;
+        var ordered = document.getElementById("ordered").value;
+        var description = document.getElementById("description").value;
+        var objStatus = document.getElementsByName("status");
+        for (let i = 0; i < objStatus.length; i++) {
+            if (objStatus[i].checked) {
+                var status = objStatus[i].value;
+            }
+        }
+
+        axios({
+            "method": "post",
+            "url": "http://localhost:8080/day10-jsp/addBrandAxios",
+            "data": "brandName=" + brandName + "&companyName=" + companyName + "&ordered=" + ordered + "&description=" + description + "&status=" + status
+        }).then(function(resp) {
+            var result = resp.data.result;
+            if (result > 0) {
+                location.href = "http://localhost:8080/day10-jsp/getAllBrands.html";
+            } else {
+                document.getElementById("result").innerHTML = "添加失败";
+            }
+        })
+    }
+</script>
+</body>
+</html>
