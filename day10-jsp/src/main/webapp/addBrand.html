@@ -36,7 +36,13 @@
         axios({
             "method": "post",
             "url": "http://localhost:8080/day10-jsp/addBrandAxios",
-            "data": "brandName=" + brandName + "&companyName=" + companyName + "&ordered=" + ordered + "&description=" + description + "&status=" + status
+            "data": {
+                "brandName": brandName,
+                "companyName": companyName,
+                "ordered": ordered,
+                "description": description,
+                "status": status
+            }
         }).then(function(resp) {
             var result = resp.data.result;
             if (result > 0) {
