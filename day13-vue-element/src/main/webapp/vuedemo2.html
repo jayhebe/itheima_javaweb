@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <input v-model="url">
+  <a v-bind:href="url">点击一下</a>
+  <a :href="url">点击一下</a>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: function() {
+      return {
+        url: "https://www.baidu.com"
+      }
+    }
+  });
+</script>
+</body>
+</html>

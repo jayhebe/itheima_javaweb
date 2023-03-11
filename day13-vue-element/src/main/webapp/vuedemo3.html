@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <input v-model="message">
+  <input type="button" value="click me" v-on:click="show()">
+  <input type="button" value="click me" @click="show()">
+</div>
+<script src="js/vue.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: function() {
+      return {
+        message: ""
+      }
+    },
+    methods: {
+      show() {
+        alert(this.message);
+      }
+    }
+  });
+</script>
+</body>
+</html>
