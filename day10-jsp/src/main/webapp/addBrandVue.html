@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加品牌</title>
+</head>
+<body>
+<h3>添加品牌</h3>
+<div id="add">
+    <div id="result"></div>
+    品牌名称：<input v-model="brandName"><br>
+    企业名称：<input v-model="companyName"><br>
+    排序：<input v-model="ordered"><br>
+    描述信息：<textarea rows="5" cols="20" v-model="description"></textarea><br>
+    状态：
+    <input type="radio" v-model="status" value="0">禁用
+    <input type="radio" v-model="status" value="1">启用<br>
+
+    <input type="submit" id="submit" value="提交" @click="add()">
+</div>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el: "#add",
+        data: function() {
+            return {
+                brandName: "",
+                companyName: "",
+                ordered: "",
+                description: "",
+                status: ""
+            }
+        },
+        methods: {
+            add() {
+                var _this = this;
+                axios({
+                    "method": "post",
+                    "url": "http://localhost:8080/day10-jsp/addBrandAxios",
+                    "data": {
+                        "brandName": _this.brandName,
+                        "companyName": _this.companyName,
+                        "ordered": _this.ordered,
+                        "description": _this.description,
+                        "status": _this.status
+                    }
+                }).then(function(resp) {
+                    var result = resp.data.result;
+                    if (result > 0) {
+                        location.href = "http://localhost:8080/day10-jsp/getAllBrandsVue.html";
+                    } else {
+                        document.getElementById("result").innerHTML = "添加失败";
+                    }
+                })
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

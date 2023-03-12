@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有品牌</title>
+</head>
+<body>
+<input type="button" value="新增" id="add"><br>
+<hr>
+<table id="brands" border="1" cellspacing="0" width="60%">
+    <tr>
+        <th>序号</th>
+        <th>品牌名称</th>
+        <th>企业名称</th>
+        <th>排序</th>
+        <th>品牌介绍</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <tr v-for="(brand, i) in brands" align="center">
+        <td>{{i + 1}}</td>
+        <td>{{brand.brandName}}</td>
+        <td>{{brand.companyName}}</td>
+        <td>{{brand.ordered}}</td>
+        <td>{{brand.description}}</td>
+        <td>{{brand.status}}</td>
+        <td>
+            <a href="#">修改</a>
+            <a href="#">删除</a>
+        </td>
+    </tr>
+</table>
+<script src="js/vue.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+  new Vue({
+    el: "#brands",
+    data: function() {
+      return {
+        brands: []
+      }
+    },
+    mounted: function() {
+      var _this = this;
+      axios.get("http://localhost:8080/day10-jsp/getAllBrandsByJson").then(function(resp) {
+        _this.brands = resp.data;
+      });
+    }
+  });
+
+  document.getElementById("add").onclick = function (){
+      location.href = "/day10-jsp/addBrandVue.html";
+  }
+</script>
+</body>
+</html>
