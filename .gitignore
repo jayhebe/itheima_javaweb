@@ -4,3 +4,4 @@ target
 lib
 mybatis-config.xml
 *.properties
+element-ui
