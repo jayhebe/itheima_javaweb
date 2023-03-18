@@ -1,5 +1,9 @@
 package cn.mycloudway.mapper;
 
-public interface BrandMapper {
+import cn.mycloudway.pojo.Brand;
 
+import java.util.List;
+
+public interface BrandMapper {
+    List<Brand> selectAll();
 }
