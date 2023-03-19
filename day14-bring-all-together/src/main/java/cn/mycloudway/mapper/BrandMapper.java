@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BrandMapper {
     List<Brand> selectAll();
-
+    List<Brand> search(Brand brand);
     int add(Brand brand);
 }

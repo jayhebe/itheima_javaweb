@@ -24,6 +24,18 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Brand> search(Brand brand) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        List<Brand> brands = brandMapper.search(brand);
+
+        sqlSession.close();
+
+        return brands;
+    }
+
+    @Override
     public int add(Brand brand, boolean commit) {
         SqlSession sqlSession = sqlSessionFactory.openSession(commit);
         BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);

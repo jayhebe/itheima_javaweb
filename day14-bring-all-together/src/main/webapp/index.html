@@ -13,14 +13,15 @@
                 <el-option label="禁用" value="0"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="企业名称">
-            <el-input v-model="search.companyName" placeholder="企业名称"></el-input>
-        </el-form-item>
         <el-form-item label="品牌名称">
             <el-input v-model="search.brandName" placeholder="品牌名称"></el-input>
         </el-form-item>
+        <el-form-item label="企业名称">
+            <el-input v-model="search.companyName" placeholder="企业名称"></el-input>
+        </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="onSearch">查询</el-button>
+            <el-button type="info" @click="onClean">清除</el-button>
         </el-form-item>
     </el-form>
     <el-button type="danger" plain>批量删除</el-button>
@@ -89,8 +90,8 @@
                     align="center"
                     label="操作">
                 <el-row>
-                    <el-button type="primary">修改</el-button>
-                    <el-button type="danger">删除</el-button>
+                    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                    <el-button type="danger" icon="el-icon-delete" circle></el-button>
                 </el-row>
             </el-table-column>
         </el-table>
@@ -99,10 +100,10 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
+            :page-sizes="[10, 20, 30, 40]"
+            :page-size="10"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="400">
+            :total="total">
     </el-pagination>
 </div>
 
@@ -118,7 +119,29 @@
             this.multipleSelection = val;
           },
           onSearch() {
-            console.log(this.brand);
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/day14-bring-all-together/searchBrands",
+                data: this.search
+            }).then(function(resp) {
+                var brandData = resp.data;
+                for (let i = 0; i < brandData.length; i++) {
+                    if (brandData[i].status == 1) {
+                        brandData[i].status = "启用";
+                    } else {
+                        brandData[i].status = "禁用";
+                    }
+                }
+                _this.tableData = brandData;
+                _this.total = brandData.length;
+            });
+          },
+          onClean() {
+            this.search.brandName = "";
+            this.search.companyName = "";
+            this.search.status = "";
+            this.onSearch();
           },
           onSubmit() {
             var _this = this;
@@ -166,7 +189,8 @@
                 { required: true, message: '请输入企业名称', trigger: 'blur' }
               ],
             },
-            currentPage: 1
+            currentPage: 1,
+            total: ""
           }
         },
         mounted: function() {
@@ -184,6 +208,7 @@
                     }
                 }
                 _this.tableData = brandData;
+                _this.total = brandData.length;
             });
         }
     });

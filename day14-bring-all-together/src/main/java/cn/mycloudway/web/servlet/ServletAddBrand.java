@@ -14,12 +14,12 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/addBrand")
 public class ServletAddBrand extends HttpServlet {
+    private BrandService brandService = new BrandServiceImpl();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String formData = req.getReader().readLine();
         Brand brand = JSON.parseObject(formData, Brand.class);
 
-        BrandService brandService = new BrandServiceImpl();
         int result = brandService.add(brand, true);
 
         resp.getWriter().write("{\"result\":" + result + "}");

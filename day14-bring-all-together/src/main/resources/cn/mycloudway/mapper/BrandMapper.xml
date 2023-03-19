@@ -12,6 +12,21 @@
         SELECT * FROM tb_brand
     </select>
 
+    <select id="search" resultMap="BrandMap">
+        SELECT * FROM tb_brand
+        <where>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="brandName != null and brandName != '' ">
+                AND brand_name like #{brandName}
+            </if>
+            <if test="companyName != null and companyName != '' ">
+                AND company_name like #{companyName}
+            </if>
+        </where>
+    </select>
+
     <insert id="add">
         INSERT INTO
             tb_brand (brand_name, company_name, ordered, description, status)
