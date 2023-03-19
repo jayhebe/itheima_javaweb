@@ -24,7 +24,7 @@
             <el-button type="info" @click="onClean">清除</el-button>
         </el-form-item>
     </el-form>
-    <el-button type="danger" plain>批量删除</el-button>
+    <el-button type="danger" plain @click="batchDelete">批量删除</el-button>
     <el-button type="primary" plain @click="dialogVisible = true">新增</el-button>
     <el-dialog
             title="编辑品牌"
@@ -82,7 +82,7 @@
                     label="排序">
             </el-table-column>
             <el-table-column
-                    prop="status"
+                    prop="displayStatus"
                     align="center"
                     label="当前状态">
             </el-table-column>
@@ -117,24 +117,44 @@
         methods: {
           handleSelectionChange(val) {
             this.multipleSelection = val;
+            console.log(this.multipleSelection);
+          },
+          success() {
+            this.$message({
+              message: "操作成功",
+              type: "success",
+              showClose: true
+            });
+          },
+          showData(resp) {
+            var brandData = resp.data;
+            for (let i = 0; i < brandData.length; i++) {
+                if (brandData[i].status == 1) {
+                    brandData[i].displayStatus = "启用";
+                } else {
+                    brandData[i].displayStatus = "禁用";
+                }
+            }
+            this.tableData = brandData;
+            this.total = brandData.length;
+          },
+          selectAll() {
+            var _this = this;
+            axios({
+                method: "get",
+                url: "http://localhost:8080/day14-bring-all-together/brand/selectAll"
+            }).then(function(resp) {
+                _this.showData(resp);
+            });
           },
           onSearch() {
             var _this = this;
             axios({
                 method: "post",
-                url: "http://localhost:8080/day14-bring-all-together/searchBrands",
+                url: "http://localhost:8080/day14-bring-all-together/brand/search",
                 data: this.search
             }).then(function(resp) {
-                var brandData = resp.data;
-                for (let i = 0; i < brandData.length; i++) {
-                    if (brandData[i].status == 1) {
-                        brandData[i].status = "启用";
-                    } else {
-                        brandData[i].status = "禁用";
-                    }
-                }
-                _this.tableData = brandData;
-                _this.total = brandData.length;
+                _this.showData(resp);
             });
           },
           onClean() {
@@ -147,12 +167,29 @@
             var _this = this;
             axios({
                 method: "post",
-                url: "http://localhost:8080/day14-bring-all-together/addBrand",
+                url: "http://localhost:8080/day14-bring-all-together/brand/add",
                 data: this.brand
             }).then(function(resp) {
                 var result = resp.data["result"];
                 if (result > 0) {
-                    location.href = "http://localhost:8080/day14-bring-all-together/brand.html";
+                    _this.dialogVisible = false;
+                    _this.success();
+                    _this.selectAll();
+                    _this.brand = "";
+                }
+            });
+          },
+          batchDelete() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/day14-bring-all-together/brand/batchDelete",
+                data: this.multipleSelection
+            }).then(function(resp) {
+                var result = resp.data["result"];
+                if (result == _this.multipleSelection.length) {
+                    _this.success();
+                    _this.selectAll();
                 }
             });
           },
@@ -190,26 +227,11 @@
               ],
             },
             currentPage: 1,
-            total: ""
+            total: 0
           }
         },
         mounted: function() {
-            var _this = this;
-            axios({
-                method: "get",
-                url: "http://localhost:8080/day14-bring-all-together/getAllBrands"
-            }).then(function(resp) {
-                var brandData = resp.data;
-                for (let i = 0; i < brandData.length; i++) {
-                    if (brandData[i].status == 1) {
-                        brandData[i].status = "启用";
-                    } else {
-                        brandData[i].status = "禁用";
-                    }
-                }
-                _this.tableData = brandData;
-                _this.total = brandData.length;
-            });
+            this.selectAll();
         }
     });
 </script>

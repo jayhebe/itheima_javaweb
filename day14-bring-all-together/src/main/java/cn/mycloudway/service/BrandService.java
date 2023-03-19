@@ -8,4 +8,5 @@ public interface BrandService {
     List<Brand> selectAll();
     List<Brand> search(Brand brand);
     int add(Brand brand, boolean commit);
+    int delete(Integer id, boolean commit);
 }

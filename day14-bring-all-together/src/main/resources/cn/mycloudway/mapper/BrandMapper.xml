@@ -33,4 +33,8 @@
         VALUES
             (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status})
     </insert>
+
+    <delete id="delete">
+        DELETE FROM tb_brand WHERE id = #{id}
+    </delete>
 </mapper>
