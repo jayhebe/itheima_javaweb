@@ -22,4 +22,16 @@ public class BrandServiceImpl implements BrandService {
 
         return brands;
     }
+
+    @Override
+    public int add(Brand brand, boolean commit) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(commit);
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int result = brandMapper.add(brand);
+
+        sqlSession.close();
+
+        return result;
+    }
 }

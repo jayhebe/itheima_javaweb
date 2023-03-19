@@ -14,4 +14,13 @@ public class TestBrandService {
 
         assert brands != null && brands.size() > 0;
     }
+
+    @Test
+    public void testAdd() {
+        BrandService brandService = new BrandServiceImpl();
+        Brand brand = new Brand("test", "test", 10, 1, "test");
+        int result = brandService.add(brand, false);
+
+        assert result > 0;
+    }
 }

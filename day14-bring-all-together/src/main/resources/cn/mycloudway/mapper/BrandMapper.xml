@@ -11,4 +11,11 @@
     <select id="selectAll" resultMap="BrandMap">
         SELECT * FROM tb_brand
     </select>
+
+    <insert id="add">
+        INSERT INTO
+            tb_brand (brand_name, company_name, ordered, description, status)
+        VALUES
+            (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status})
+    </insert>
 </mapper>
