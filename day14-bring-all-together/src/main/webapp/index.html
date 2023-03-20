@@ -180,17 +180,28 @@
             });
           },
           batchDelete() {
-            var _this = this;
-            axios({
-                method: "post",
-                url: "http://localhost:8080/day14-bring-all-together/brand/batchDelete",
-                data: this.multipleSelection
-            }).then(function(resp) {
-                var result = resp.data["result"];
-                if (result == _this.multipleSelection.length) {
-                    _this.success();
-                    _this.selectAll();
-                }
+            this.$confirm('此操作将删除该数据, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                var _this = this;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/day14-bring-all-together/brand/batchDelete",
+                    data: this.multipleSelection
+                }).then(function(resp) {
+                    var result = resp.data["result"];
+                    if (result == _this.multipleSelection.length) {
+                        _this.success();
+                        _this.selectAll();
+                    }
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
             });
           },
           handleSizeChange(val) {
