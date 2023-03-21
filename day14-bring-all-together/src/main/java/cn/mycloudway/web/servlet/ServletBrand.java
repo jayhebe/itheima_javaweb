@@ -45,6 +45,14 @@ public class ServletBrand extends ServletBase {
         resp.getWriter().write("{\"result\":" + result + "}");
     }
 
+    public void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String item = req.getReader().readLine();
+        Brand brand = JSON.parseObject(item, Brand.class);
+        int result = brandService.delete(brand.getId(), true);
+
+        resp.getWriter().write("{\"result\":" + result + "}");
+    }
+
     public void batchDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String items = req.getReader().readLine();
         List<Brand> brands = JSON.parseArray(items, Brand.class);
