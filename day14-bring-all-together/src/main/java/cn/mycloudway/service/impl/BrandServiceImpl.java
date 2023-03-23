@@ -48,6 +48,18 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public int update(Brand brand, boolean commit) {
+        SqlSession sqlSession = sqlSessionFactory.openSession(commit);
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int result = brandMapper.update(brand);
+
+        sqlSession.close();
+
+        return result;
+    }
+
+    @Override
     public int delete(Integer id, boolean commit) {
         SqlSession sqlSession = sqlSessionFactory.openSession(commit);
         BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);

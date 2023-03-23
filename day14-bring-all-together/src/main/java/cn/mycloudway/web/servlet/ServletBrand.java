@@ -45,6 +45,15 @@ public class ServletBrand extends ServletBase {
         resp.getWriter().write("{\"result\":" + result + "}");
     }
 
+    public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String formData = req.getReader().readLine();
+        Brand brand = JSON.parseObject(formData, Brand.class);
+
+        int result = brandService.update(brand, true);
+
+        resp.getWriter().write("{\"result\":" + result + "}");
+    }
+
     public void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String item = req.getReader().readLine();
         Brand brand = JSON.parseObject(item, Brand.class);

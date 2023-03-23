@@ -9,4 +9,5 @@ public interface BrandService {
     List<Brand> search(Brand brand);
     int add(Brand brand, boolean commit);
     int delete(Integer id, boolean commit);
+    int update(Brand brand, boolean commit);
 }

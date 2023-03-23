@@ -37,4 +37,17 @@
     <delete id="delete">
         DELETE FROM tb_brand WHERE id = #{id}
     </delete>
+
+    <update id="update">
+        UPDATE
+            tb_brand
+        SET
+            brand_name = #{brandName},
+            company_name = #{companyName},
+            ordered = #{ordered},
+            description = #{description},
+            status = #{status}
+        WHERE
+            id = #{id}
+    </update>
 </mapper>

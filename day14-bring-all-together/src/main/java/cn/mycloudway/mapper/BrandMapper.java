@@ -10,4 +10,5 @@ public interface BrandMapper {
     List<Brand> search(Brand brand);
     int add(Brand brand);
     int delete(@Param("id") Integer id);
+    int update(Brand brand);
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>品牌列表</title>
 </head>
 <body>
 <div id="app">
@@ -25,16 +25,16 @@
         </el-form-item>
     </el-form>
     <el-button type="danger" plain @click="batchDelete">批量删除</el-button>
-    <el-button type="primary" plain @click="dialogVisible = true">新增</el-button>
+    <el-button type="primary" plain @click="addDialogVisible = true">新增</el-button>
     <el-dialog
-            title="编辑品牌"
-            :visible.sync="dialogVisible"
+            title="新增品牌"
+            :visible.sync="addDialogVisible"
             width="20%">
         <el-form ref="brand" :model="brand" :rules="rules" label-width="80px">
-            <el-form-item label="品牌名称" prop="brandName">
+            <el-form-item label="品牌名称">
                 <el-input v-model="brand.brandName"></el-input>
             </el-form-item>
-            <el-form-item label="企业名称" prop="companyName">
+            <el-form-item label="企业名称">
                 <el-input v-model="brand.companyName"></el-input>
             </el-form-item>
             <el-form-item label="排序">
@@ -43,12 +43,38 @@
             <el-form-item label="描述">
                 <el-input type="textarea" v-model="brand.description"></el-input>
             </el-form-item>
-            <el-form-item label="状态" prop="status">
-                <el-switch v-model="brand.status" active-value="1" inactive-value="0"></el-switch>
+            <el-form-item label="状态">
+                <el-switch v-model="brand.status" :active-value="1" :inactive-value="0"></el-switch>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
-                <el-button @click="dialogVisible = false">取消</el-button>
+                <el-button @click="addDialogVisible = false">取消</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
+    <el-dialog
+            title="编辑品牌"
+            :visible.sync="editDialogVisible"
+            width="20%">
+        <el-form ref="brand" :model="brand" :rules="rules" label-width="80px">
+            <el-form-item label="品牌名称">
+                <el-input v-model="brand.brandName"></el-input>
+            </el-form-item>
+            <el-form-item label="企业名称">
+                <el-input v-model="brand.companyName"></el-input>
+            </el-form-item>
+            <el-form-item label="排序">
+                <el-input v-model="brand.ordered"></el-input>
+            </el-form-item>
+            <el-form-item label="描述">
+                <el-input type="textarea" v-model="brand.description"></el-input>
+            </el-form-item>
+            <el-form-item label="状态">
+                <el-switch v-model="brand.status" :active-value="1" :inactive-value="0"></el-switch>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onUpdate">确认修改</el-button>
+                <el-button @click="editDialogVisible = false">取消</el-button>
             </el-form-item>
         </el-form>
     </el-dialog>
@@ -90,7 +116,7 @@
                     align="center"
                     label="操作">
                     <template slot-scope="scope">
-                        <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                        <el-button type="primary" icon="el-icon-edit" circle @click="onEdit(scope.row)"></el-button>
                         <el-button type="danger" icon="el-icon-delete" circle @click="onDelete(scope.row)"></el-button>
                     </template>
             </el-table-column>
@@ -172,15 +198,33 @@
             }).then(function(resp) {
                 var result = resp.data["result"];
                 if (result > 0) {
-                    _this.dialogVisible = false;
+                    _this.addDialogVisible = false;
                     _this.success();
                     _this.selectAll();
                     _this.brand = "";
                 }
             });
           },
+          onEdit(row) {
+            this.brand = row;
+            this.editDialogVisible = true;
+          },
+          onUpdate() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/day14-bring-all-together/brand/update",
+                data: this.brand
+            }).then(function(resp) {
+                var result = resp.data["result"];
+                if (result > 0) {
+                    _this.editDialogVisible = false;
+                    _this.success();
+                    _this.selectAll();
+                }
+            });
+          },
           onDelete(row) {
-            console.log(row);
             this.$confirm("此操作将删除该数据, 是否继续？", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -256,7 +300,8 @@
               ordered: '',
               description: ''
             },
-            dialogVisible: false,
+            addDialogVisible: false,
+            editDialogVisible: false,
             rules: {
               brandName: [
                 { required: true, message: '请输入品牌名称', trigger: 'blur' },
