@@ -39,15 +39,18 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<Brand> search(Brand brand) {
+    public PageBean<Brand> search(Brand brand, int start, int size) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
 
-        List<Brand> brands = brandMapper.search(brand);
+        int totalCount = brandMapper.getTotalCountByCondition(brand);
+        List<Brand> brands = brandMapper.search(brand, start, size);
+
+        PageBean<Brand> brandPageBean = new PageBean<>(totalCount, brands);
 
         sqlSession.close();
 
-        return brands;
+        return brandPageBean;
     }
 
     @Override

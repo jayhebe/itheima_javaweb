@@ -8,7 +8,7 @@ import java.util.List;
 public interface BrandService {
     List<Brand> selectAll();
     PageBean<Brand> selectByPage(int start, int size);
-    List<Brand> search(Brand brand);
+    PageBean<Brand> search(Brand brand, int start, int size);
     int add(Brand brand, boolean commit);
     int delete(Integer id, boolean commit);
     int update(Brand brand, boolean commit);

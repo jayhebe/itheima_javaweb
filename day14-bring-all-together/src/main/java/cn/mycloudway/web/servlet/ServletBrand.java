@@ -40,10 +40,23 @@ public class ServletBrand extends ServletBase {
     public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String searchData = req.getReader().readLine();
         Brand brand = JSON.parseObject(searchData, Brand.class);
-        brand.setBrandName("%" + brand.getBrandName() + "%");
-        brand.setCompanyName("%" + brand.getCompanyName() + "%");
 
-        List<Brand> brands = brandService.search(brand);
+        int page = Integer.parseInt(req.getParameter("page"));
+        int pageSize = Integer.parseInt(req.getParameter("pageSize"));
+
+        int start = (page - 1) * pageSize;
+
+        String brandName = brand.getBrandName();
+        if (brandName != null && brandName.length() > 0) {
+            brand.setBrandName("%" + brandName + "%");
+        }
+
+        String companyName = brand.getCompanyName();
+        if (companyName != null && companyName.length() > 0) {
+            brand.setCompanyName("%" + companyName + "%");
+        }
+
+        PageBean<Brand> brands = brandService.search(brand, start, pageSize);
         String jsonBrands = JSON.toJSONString(brands);
 
         resp.setContentType("application/json;charset=utf8");

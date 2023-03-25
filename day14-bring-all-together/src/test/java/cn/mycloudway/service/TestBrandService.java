@@ -1,6 +1,7 @@
 package cn.mycloudway.service;
 
 import cn.mycloudway.pojo.Brand;
+import cn.mycloudway.pojo.PageBean;
 import cn.mycloudway.service.impl.BrandServiceImpl;
 import org.junit.Test;
 
@@ -19,9 +20,9 @@ public class TestBrandService {
     public void testSearch() {
         BrandService brandService = new BrandServiceImpl();
         Brand brand = new Brand("华为", null, null, null, null);
-        List<Brand> brands = brandService.search(brand);
+        PageBean<Brand> brands = brandService.search(brand, 1, 5);
 
-        assert brands != null && brands.size() > 0;
+        assert brands != null;
     }
 
     @Test

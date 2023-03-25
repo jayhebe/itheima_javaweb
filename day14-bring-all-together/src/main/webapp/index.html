@@ -165,32 +165,25 @@
             this.total = resp.data.totalCount;
           },
           selectAll() {
-            var _this = this;
             axios({
                 method: "get",
                 url: "http://localhost:8080/day14-bring-all-together/brand/selectAll"
-            }).then(function(resp) {
-                _this.showData(resp);
+            }).then(resp => {
+                this.showData(resp);
             });
           },
-          selectByPage() {
-            var _this = this;
+          selectByPageAndCondition() {
             axios({
-                method: "get",
-                url: "http://localhost:8080/day14-bring-all-together/brand/selectByPage?page=" + this.currentPage + "&pageSize=" + this.pageSize
-            }).then(function(resp) {
-                _this.showData(resp);
+                method: "post",
+                url: "http://localhost:8080/day14-bring-all-together/brand/search?page=" + this.currentPage + "&pageSize=" + this.pageSize,
+                data: this.search
+            }).then(resp => {
+                this.showData(resp);
             });
           },
           onSearch() {
-            var _this = this;
-            axios({
-                method: "post",
-                url: "http://localhost:8080/day14-bring-all-together/brand/search",
-                data: this.search
-            }).then(function(resp) {
-                _this.showData(resp);
-            });
+            this.currentPage = 1;
+            this.selectByPageAndCondition();
           },
           onClean() {
             this.search.brandName = "";
@@ -199,18 +192,17 @@
             this.onSearch();
           },
           onSubmit() {
-            var _this = this;
             axios({
                 method: "post",
                 url: "http://localhost:8080/day14-bring-all-together/brand/add",
                 data: this.brand
-            }).then(function(resp) {
+            }).then(resp => {
                 var result = resp.data["result"];
                 if (result > 0) {
-                    _this.addDialogVisible = false;
-                    _this.success();
-                    _this.selectAll();
-                    _this.brand = "";
+                    this.addDialogVisible = false;
+                    this.success();
+                    this.onSearch();
+                    this.brand = "";
                 }
             });
           },
@@ -219,17 +211,16 @@
             this.editDialogVisible = true;
           },
           onUpdate() {
-            var _this = this;
             axios({
                 method: "post",
                 url: "http://localhost:8080/day14-bring-all-together/brand/update",
                 data: this.brand
-            }).then(function(resp) {
+            }).then(resp => {
                 var result = resp.data["result"];
                 if (result > 0) {
-                    _this.editDialogVisible = false;
-                    _this.success();
-                    _this.selectAll();
+                    this.editDialogVisible = false;
+                    this.success();
+                    this.onSearch();
                 }
             });
           },
@@ -239,16 +230,15 @@
                 cancelButtonText: "取消",
                 type: 'warning'
             }).then(() => {
-                var _this = this;
                 axios({
                     method: "post",
                     url: "http://localhost:8080/day14-bring-all-together/brand/delete",
                     data: row
-                }).then(function(resp) {
+                }).then(resp => {
                     var result = resp.data["result"];
                     if (result > 0) {
-                        _this.success();
-                        _this.selectAll();
+                        this.success();
+                        this.selectAll();
                     }
                 });
             }).catch(() => {
@@ -265,16 +255,15 @@
                 cancelButtonText: "取消",
                 type: 'warning'
             }).then(() => {
-                var _this = this;
                 axios({
                     method: "post",
                     url: "http://localhost:8080/day14-bring-all-together/brand/batchDelete",
                     data: this.multipleSelection
-                }).then(function(resp) {
+                }).then(resp => {
                     var result = resp.data["result"];
-                    if (result == _this.multipleSelection.length) {
-                        _this.success();
-                        _this.selectAll();
+                    if (result == this.multipleSelection.length) {
+                        this.success();
+                        this.selectAll();
                     }
                 });
             }).catch(() => {
@@ -287,11 +276,11 @@
           },
           handleSizeChange(val) {
             this.pageSize = val;
-            this.selectByPage();
+            this.selectByPageAndCondition();
           },
           handleCurrentChange(val) {
             this.currentPage = val;
-            this.selectByPage();
+            this.selectByPageAndCondition();
           }
         },
         data: function() {
@@ -327,7 +316,7 @@
           }
         },
         mounted: function() {
-            this.selectByPage();
+            this.onSearch();
         }
     });
 </script>

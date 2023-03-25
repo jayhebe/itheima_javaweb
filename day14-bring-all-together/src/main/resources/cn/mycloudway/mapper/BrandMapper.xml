@@ -23,6 +23,22 @@
     <select id="search" resultMap="BrandMap">
         SELECT * FROM tb_brand
         <where>
+            <if test="brand.status != null">
+                AND status = #{brand.status}
+            </if>
+            <if test="brand.brandName != null and brand.brandName != '' ">
+                AND brand_name like #{brand.brandName}
+            </if>
+            <if test="brand.companyName != null and brand.companyName != '' ">
+                AND company_name like #{brand.companyName}
+            </if>
+        </where>
+        LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getTotalCountByCondition" resultType="Integer">
+        SELECT COUNT(*) FROM tb_brand
+        <where>
             <if test="status != null">
                 AND status = #{status}
             </if>
