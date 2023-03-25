@@ -12,6 +12,14 @@
         SELECT * FROM tb_brand
     </select>
 
+    <select id="selectByPage" resultMap="BrandMap">
+        SELECT * FROM tb_brand LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getTotalCount" resultType="Integer">
+        SELECT COUNT(*) FROM tb_brand
+    </select>
+
     <select id="search" resultMap="BrandMap">
         SELECT * FROM tb_brand
         <where>

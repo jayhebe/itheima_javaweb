@@ -126,8 +126,8 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[10, 20, 30, 40]"
-            :page-size="10"
+            :page-sizes="[10, 20, 50]"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total">
     </el-pagination>
@@ -153,7 +153,7 @@
             });
           },
           showData(resp) {
-            var brandData = resp.data;
+            var brandData = resp.data.rows;
             for (let i = 0; i < brandData.length; i++) {
                 if (brandData[i].status == 1) {
                     brandData[i].displayStatus = "启用";
@@ -162,13 +162,22 @@
                 }
             }
             this.tableData = brandData;
-            this.total = brandData.length;
+            this.total = resp.data.totalCount;
           },
           selectAll() {
             var _this = this;
             axios({
                 method: "get",
                 url: "http://localhost:8080/day14-bring-all-together/brand/selectAll"
+            }).then(function(resp) {
+                _this.showData(resp);
+            });
+          },
+          selectByPage() {
+            var _this = this;
+            axios({
+                method: "get",
+                url: "http://localhost:8080/day14-bring-all-together/brand/selectByPage?page=" + this.currentPage + "&pageSize=" + this.pageSize
             }).then(function(resp) {
                 _this.showData(resp);
             });
@@ -277,10 +286,12 @@
             });
           },
           handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            this.selectByPage();
           },
           handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+            this.currentPage = val;
+            this.selectByPage();
           }
         },
         data: function() {
@@ -310,12 +321,13 @@
                 { required: true, message: '请输入企业名称', trigger: 'blur' }
               ],
             },
+            pageSize: 10,
             currentPage: 1,
             total: 0
           }
         },
         mounted: function() {
-            this.selectAll();
+            this.selectByPage();
         }
     });
 </script>

@@ -2,6 +2,7 @@ package cn.mycloudway.service.impl;
 
 import cn.mycloudway.mapper.BrandMapper;
 import cn.mycloudway.pojo.Brand;
+import cn.mycloudway.pojo.PageBean;
 import cn.mycloudway.service.BrandService;
 import cn.mycloudway.util.SqlSessionFactoryUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,20 @@ public class BrandServiceImpl implements BrandService {
         sqlSession.close();
 
         return brands;
+    }
+
+    public PageBean<Brand> selectByPage(int start, int size) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int totalCount = brandMapper.getTotalCount();
+        List<Brand> brands = brandMapper.selectByPage(start, size);
+
+        PageBean<Brand> brandPageBean = new PageBean<>(totalCount, brands);
+
+        sqlSession.close();
+
+        return brandPageBean;
     }
 
     @Override

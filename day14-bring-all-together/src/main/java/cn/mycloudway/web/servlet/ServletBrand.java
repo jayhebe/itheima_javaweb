@@ -1,6 +1,7 @@
 package cn.mycloudway.web.servlet;
 
 import cn.mycloudway.pojo.Brand;
+import cn.mycloudway.pojo.PageBean;
 import cn.mycloudway.service.BrandService;
 import cn.mycloudway.service.impl.BrandServiceImpl;
 import com.alibaba.fastjson.JSON;
@@ -17,6 +18,19 @@ public class ServletBrand extends ServletBase {
     private BrandService brandService = new BrandServiceImpl();
     public void selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Brand> brands = brandService.selectAll();
+        String jsonBrands = JSON.toJSONString(brands);
+
+        resp.setContentType("application/json;charset=utf8");
+        resp.getWriter().write(jsonBrands);
+    }
+
+    public void selectByPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int page = Integer.parseInt(req.getParameter("page"));
+        int pageSize = Integer.parseInt(req.getParameter("pageSize"));
+
+        int start = (page - 1) * pageSize;
+
+        PageBean<Brand> brands = brandService.selectByPage(start, pageSize);
         String jsonBrands = JSON.toJSONString(brands);
 
         resp.setContentType("application/json;charset=utf8");
